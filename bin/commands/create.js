@@ -11,7 +11,7 @@ import path from 'path';
 import { existsSync, rmSync } from 'fs';
 import select from '@inquirer/select';
 import { loading } from '../utils/loading.js';
-import { fetchOrganizationRepos } from '../utils/project.js';
+import { fetchOrganizationRepos, fetchOrganizationRepoTags } from '../utils/project.js';
 export default function (name, options) {
     return __awaiter(this, void 0, void 0, function* () {
         const { force } = options;
@@ -55,6 +55,15 @@ export default function (name, options) {
         }
         // 拉取项目仓库中的项目
         const projects = yield fetchOrganizationRepos();
-        console.log(projects);
+        const project = yield select({
+            message: 'please select a project',
+            choices: projects
+        });
+        // 拉取项目版本信息
+        const tags = yield fetchOrganizationRepoTags(project);
+        const tag = yield select({
+            message: 'please select a version',
+            choices: tags
+        });
     });
 }

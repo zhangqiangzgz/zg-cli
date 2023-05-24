@@ -12,12 +12,18 @@ const organization = 'zg-cli';
 export function fetchOrganizationRepos() {
     return __awaiter(this, void 0, void 0, function* () {
         const { data = [] } = yield axios.get(`https://api.github.com/orgs/${organization}/repos`);
-        return data.map((project) => project.name);
+        return data.map((project) => ({
+            name: project.name,
+            value: project.name
+        })) || [];
     });
 }
 export function fetchOrganizationRepoTags(repo) {
     return __awaiter(this, void 0, void 0, function* () {
         const { data = [] } = yield axios.get(`https://api.github.com/orgs/${organization}/${repo}/tags`);
-        return data.map((tag) => tag.name);
+        return data.map((tag) => ({
+            name: tag.name,
+            value: tag.name
+        })) || [];
     });
 }
