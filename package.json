@@ -3,10 +3,25 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "bin": "./bin/index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npx nodemon"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@inquirer/select": "^1.1.7",
+    "axios": "^1.4.0",
+    "chalk": "^5.2.0",
+    "commander": "^10.0.1",
+    "ini": "^4.1.1",
+    "ora": "^6.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.2.3",
+    "nodemon": "^2.0.22",
+    "typescript": "^5.0.4"
+  }
 }
