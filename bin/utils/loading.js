@@ -17,3 +17,12 @@ export function loading(message, callback) {
         return result;
     });
 }
+export function loadingFn(message, callback) {
+    const spinner = ora(message);
+    return (...args) => __awaiter(this, void 0, void 0, function* () {
+        spinner.start();
+        const result = yield callback(...args);
+        spinner.succeed();
+        return result;
+    });
+}

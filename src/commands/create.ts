@@ -1,7 +1,7 @@
 import path from 'path'
 import { existsSync, rmSync } from 'fs'
 import select from '@inquirer/select'
-import { loading } from '../utils/loading.js'
+import { loading, loadingFn } from '../utils/loading.js'
 import { fetchOrganizationRepos, fetchOrganizationRepoTags } from '../utils/project.js'
 
 export default async function (name: string, options: { [key: string]: unknown }) {
@@ -45,14 +45,14 @@ export default async function (name: string, options: { [key: string]: unknown }
   }
 
   // 拉取项目仓库中的项目
-  const projects = await fetchOrganizationRepos()
+  const projects = await loadingFn('fetching projects', fetchOrganizationRepos)()
   const project: string = await select({
     message: 'please select a project',
     choices: projects
   })
 
   // 拉取项目版本信息
-  const tags = await fetchOrganizationRepoTags(project)
+  const tags = await loadingFn('fetching project tags', fetchOrganizationRepoTags)(project)
   const tag = await select({
     message: 'please select a version',
     choices: tags

@@ -20,7 +20,7 @@ export function fetchOrganizationRepos() {
 }
 export function fetchOrganizationRepoTags(repo) {
     return __awaiter(this, void 0, void 0, function* () {
-        const { data = [] } = yield axios.get(`https://api.github.com/orgs/${organization}/${repo}/tags`);
+        const { data = [] } = yield axios.get(`https://api.github.com/repos/${organization}/${repo}/tags`);
         return data.map((tag) => ({
             name: tag.name,
             value: tag.name

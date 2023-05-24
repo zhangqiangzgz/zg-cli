@@ -10,7 +10,7 @@ export async function fetchOrganizationRepos() {
 }
 
 export async function fetchOrganizationRepoTags(repo: string) {
-  const { data = [] } = await axios.get(`https://api.github.com/orgs/${organization}/${repo}/tags`)
+  const { data = [] } = await axios.get(`https://api.github.com/repos/${organization}/${repo}/tags`)
   return data.map((tag: any) => ({
     name: tag.name,
     value: tag.name
