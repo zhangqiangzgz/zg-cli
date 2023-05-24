@@ -11,7 +11,7 @@ import path from 'path';
 import { existsSync, rmSync } from 'fs';
 import select from '@inquirer/select';
 import { loading, loadingFn } from '../utils/loading.js';
-import { fetchOrganizationRepos, fetchOrganizationRepoTags } from '../utils/project.js';
+import { fetchOrganizationRepos, fetchOrganizationRepoTags, cloneProject } from '../utils/project.js';
 export default function (name, options) {
     return __awaiter(this, void 0, void 0, function* () {
         const { force } = options;
@@ -65,5 +65,7 @@ export default function (name, options) {
             message: 'please select a version',
             choices: tags
         });
+        // 克隆项目到用户输入的文件夹中
+        yield loadingFn('clone project', cloneProject)(project, tag, name);
     });
 }

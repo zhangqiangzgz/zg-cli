@@ -2,7 +2,7 @@ import path from 'path'
 import { existsSync, rmSync } from 'fs'
 import select from '@inquirer/select'
 import { loading, loadingFn } from '../utils/loading.js'
-import { fetchOrganizationRepos, fetchOrganizationRepoTags } from '../utils/project.js'
+import { fetchOrganizationRepos, fetchOrganizationRepoTags, cloneProject } from '../utils/project.js'
 
 export default async function (name: string, options: { [key: string]: unknown }) {
   const { force } = options
@@ -57,4 +57,7 @@ export default async function (name: string, options: { [key: string]: unknown }
     message: 'please select a version',
     choices: tags
   })
+
+  // 克隆项目到用户输入的文件夹中
+  await loadingFn('clone project', cloneProject)(project, tag, name)
 }
