@@ -40,24 +40,31 @@ export default async function (name: string, options: { [key: string]: unknown }
         })
       } else if (answer === 'cancel') {
         console.log('user cancel')
+        return
       }
     }
   }
 
   // 拉取项目仓库中的项目
   const projects = await loadingFn('fetching projects', fetchOrganizationRepos)()
-  const project: string = await select({
-    message: 'please select a project',
-    choices: projects
-  })
+  let project: string = ''
+  let tag: string = ''
+  if (projects && projects.length > 0) {
+    project = await select({
+      message: 'please select a project',
+      choices: projects
+    })
 
-  // 拉取项目版本信息
-  const tags = await loadingFn('fetching project tags', fetchOrganizationRepoTags)(project)
-  const tag = await select({
-    message: 'please select a version',
-    choices: tags
-  })
+    // 拉取项目版本信息
+    const tags = await loadingFn('fetching project tags', fetchOrganizationRepoTags)(project)
+    if (tags && tags.length > 0) {
+      tag = await select({
+        message: 'please select a version',
+        choices: tags
+      })
+    }
 
-  // 克隆项目到用户输入的文件夹中
-  await loadingFn('clone project', cloneProject)(project, tag, name)
+    // 克隆项目到用户输入的文件夹中
+    await loadingFn('clone project', cloneProject)(project, tag, name)
+  }
 }

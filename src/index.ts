@@ -28,10 +28,10 @@ program.command('create <project-name>')
 program.command('config [value]')
   .description('inspect config')
   .option('-s, --set <property> <value>', 'set value')
-  .option('-g, -get <property>', 'get value')
+  .option('-g, --get <property>', 'get value')
   .option('-d --delete <property>', 'delete value')
-  .action((value, options) => {
-    // console.log(value, options)
+  .action(async (value, options) => {
+    (await import('./commands/config.js')).default(value, options)
   })
 
 // 自定义帮助信息

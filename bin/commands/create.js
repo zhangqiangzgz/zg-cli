@@ -50,22 +50,29 @@ export default function (name, options) {
                 }
                 else if (answer === 'cancel') {
                     console.log('user cancel');
+                    return;
                 }
             }
         }
         // 拉取项目仓库中的项目
         const projects = yield loadingFn('fetching projects', fetchOrganizationRepos)();
-        const project = yield select({
-            message: 'please select a project',
-            choices: projects
-        });
-        // 拉取项目版本信息
-        const tags = yield loadingFn('fetching project tags', fetchOrganizationRepoTags)(project);
-        const tag = yield select({
-            message: 'please select a version',
-            choices: tags
-        });
-        // 克隆项目到用户输入的文件夹中
-        yield loadingFn('clone project', cloneProject)(project, tag, name);
+        let project = '';
+        let tag = '';
+        if (projects && projects.length > 0) {
+            project = yield select({
+                message: 'please select a project',
+                choices: projects
+            });
+            // 拉取项目版本信息
+            const tags = yield loadingFn('fetching project tags', fetchOrganizationRepoTags)(project);
+            if (tags && tags.length > 0) {
+                tag = yield select({
+                    message: 'please select a version',
+                    choices: tags
+                });
+            }
+            // 克隆项目到用户输入的文件夹中
+            yield loadingFn('clone project', cloneProject)(project, tag, name);
+        }
     });
 }

@@ -2,9 +2,11 @@ import axios from 'axios'
 import { exec } from 'child_process'
 import { promisify } from 'util'
 import { rm } from 'fs/promises'
+import { getConfig } from '../commands/config.js'
 
-const organization = 'zg-cli'
 const execPromisify = promisify(exec)
+
+const { organization = 'zg-cli' } = getConfig()
 
 export async function fetchOrganizationRepos() {
   const { data = [] } = await axios.get(`https://api.github.com/orgs/${organization}/repos`)

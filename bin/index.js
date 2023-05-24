@@ -32,11 +32,11 @@ program.command('create <project-name>')
 program.command('config [value]')
     .description('inspect config')
     .option('-s, --set <property> <value>', 'set value')
-    .option('-g, -get <property>', 'get value')
+    .option('-g, --get <property>', 'get value')
     .option('-d --delete <property>', 'delete value')
-    .action((value, options) => {
-    // console.log(value, options)
-});
+    .action((value, options) => __awaiter(void 0, void 0, void 0, function* () {
+    (yield import('./commands/config.js')).default(value, options);
+}));
 // 自定义帮助信息
 program.addHelpText('after', `
 \nRun ${chalk.blueBright('zg-cli <command> --help')} for detailed usage of given command

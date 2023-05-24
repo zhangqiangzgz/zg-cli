@@ -20,8 +20,14 @@ export function loading(message, callback) {
 export function loadingFn(message, callback) {
     const spinner = ora(message);
     return (...args) => __awaiter(this, void 0, void 0, function* () {
+        let result;
         spinner.start();
-        const result = yield callback(...args);
+        try {
+            result = yield callback(...args);
+        }
+        catch (error) {
+            console.log('\n error');
+        }
         spinner.succeed();
         return result;
     });
