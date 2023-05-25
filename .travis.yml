@@ -1,13 +1,15 @@
 language: node_js
 node_js
-  - "18"
+ - "18"
 install:
-  - npm install
+ - pnpm install
+script:
+ - pnpm run build
 deploy 
-  provider: NPM
-  #email: zhangqiangzgz@hotmail.com
-  api_key: "$NPM_TOKEN"
-  cleanup: true
+ provider: NPM
+ #email: zhangqiangzgz@hotmail.com
+ api_key: "$NPM_TOKEN"
+ cleanup: true
 branches:
-  only:
-    - main
+ only:
+  - main

@@ -6,7 +6,8 @@
   "bin": "./bin/index.js",
   "type": "module",
   "scripts": {
-    "build": "npx nodemon"
+    "serve": "npx nodemon",
+    "build": "npx tsc"
   },
   "keywords": [],
   "author": "",
