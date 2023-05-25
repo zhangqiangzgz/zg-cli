@@ -1,6 +1,8 @@
 language: node_js
 node_js
   - "18"
+install:
+  - npm install
 deploy 
   provider: npm
   email: zhangqiangzgz@hotmail.com
