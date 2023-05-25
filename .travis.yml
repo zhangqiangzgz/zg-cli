@@ -4,9 +4,10 @@ node_js
 install:
   - npm install
 deploy 
-  provider: npm
-  email: zhangqiangzgz@hotmail.com
+  provider: NPM
+  #email: zhangqiangzgz@hotmail.com
   api_key: travis encrypt NPM_TOKEN --add deploy.api_key --com
-  on:
-    branch: main
-  skip-clean: true
+  cleanup: true
+branches:
+  only:
+    - main
