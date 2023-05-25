@@ -1,11 +1,11 @@
 language: node_js
-node_js
+node_js:
  - "18"
 install:
  - pnpm install
 script:
  - pnpm run build
-deploy 
+deploy:
  provider: NPM
  #email: zhangqiangzgz@hotmail.com
  api_key: "$NPM_TOKEN"
