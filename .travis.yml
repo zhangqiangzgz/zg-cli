@@ -6,7 +6,7 @@ install:
 deploy 
   provider: NPM
   #email: zhangqiangzgz@hotmail.com
-  api_key: travis encrypt NPM_TOKEN --add deploy.api_key --com
+  api_key: "$NPM_TOKEN"
   cleanup: true
 branches:
   only:
