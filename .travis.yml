@@ -1,0 +1,10 @@
+language: node_js
+node_js
+  - "18"
+deploy 
+  provider: npm
+  email: zhangqiangzgz@hotmail.com
+  api_key: travis encrypt NPM_TOKEN --add deploy.api_key --com
+  on:
+    branch: main
+  skip-clean: true
