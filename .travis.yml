@@ -13,7 +13,7 @@ deploy:
  api_token: <encrypted api_token>
  registry: https://registry.npmjs.org/
  cleanup: true
- edge: true # opt in to dpl v2
+ edge: true #opt in to dpl v2
 branches:
  only:
   - main
