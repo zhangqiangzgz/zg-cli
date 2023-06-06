@@ -6,13 +6,14 @@
   "bin": "./bin/index.js",
   "type": "module",
   "scripts": {
-    "serve": "npx nodemon",
+    "dev": "npx nodemon",
     "build": "npx tsc"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/zhangqiangzgz/zg-cli.git"
   },
+  "files": ["bin"],
   "keywords": [],
   "author": "",
   "license": "ISC",
